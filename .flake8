@@ -9,4 +9,5 @@ exclude =
     dist,
     __init__.py,
     mypy_cache,
-    .pytest_cache
+    .pytest_cache,
+    alembic/env.py

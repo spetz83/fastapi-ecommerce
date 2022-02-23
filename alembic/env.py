@@ -5,6 +5,13 @@ from sqlalchemy import pool
 
 from alembic import context
 
+from ecommerce import config as config_env
+from ecommerce.db import Base
+from ecommerce.user.models import User
+from ecommerce.products.models import Product, Category
+from ecommerce.cart.models import Cart, CartItems
+from ecommerce.orders.models import Order, OrderDetails
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -12,13 +19,6 @@ config = context.config
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
-
-from ecommerce import config as config_env
-from ecommerce.db import Base
-from ecommerce.user.models import User
-from ecommerce.products.models import Product, Category
-from ecommerce.cart.models import Cart, CartItems
-from ecommerce.orders.models import Order, OrderDetails
 
 # add your model's MetaData object here
 # for 'autogenerate' support

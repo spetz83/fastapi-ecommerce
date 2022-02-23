@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 
 from ecommerce import db
 from ecommerce.orders.services import initiate_order, get_order_listing
-from ecommerce.user.schema import User
 from .schema import ShowOrder
 
 
