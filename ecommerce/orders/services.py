@@ -1,13 +1,15 @@
 from typing import List
 from fastapi import HTTPException, status
+from sqlalchemy.orm import Session
 
 from ecommerce.cart.models import Cart, CartItems
 from ecommerce.orders.models import Order, OrderDetails
 from ecommerce.user.models import User
+from ecommerce.user import schema
 
 
-async def initiate_order(database) -> Order:
-    user = database.query(User).filter(User.email == "derp@derp.com").first()
+async def initiate_order(database: Session, current_user: schema.User) -> Order:
+    user = database.query(User).filter(User.email == current_user.email).first()
     cart = database.query(Cart).filter(Cart.user_id == user.id).first()
 
     cart_items_objects = database.query(CartItems).filter(Cart.id == cart.id)
@@ -45,7 +47,7 @@ async def initiate_order(database) -> Order:
     return new_order
 
 
-async def get_order_listing(database) -> List[Order]:
-    user = database.query(User).filter(User.email == "elon@tesla.com").first()
+async def get_order_listing(database: Session, current_user: schema.User) -> List[Order]:
+    user = database.query(User).filter(User.email == current_user.email).first()
     orders = database.query(Order).filter(Order.customer_id == user.id).all()
     return orders
